@@ -11,11 +11,12 @@ ApplicationWindow {
 
     ListView {
         width: 100; height: 100
+        spacing: 5
 
         model: logic
         delegate: Rectangle {
             height: 25
-            width: 100
+            width: parent.width
             Text { text:  name }
         }
     }
