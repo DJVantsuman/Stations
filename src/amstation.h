@@ -6,14 +6,13 @@
 class AmStation : public Station
 {
 public:
-    Q_PROPERTY(QString name READ title)
     AmStation();
-    AmStation(int radioWave, std::string name, std::string waveband);
-    ~AmStation();
+    AmStation(std::string name, std::string waveband, int wave);
     AmStation(AmStation const & station);
+    ~AmStation();
     AmStation &operator=(AmStation const & station);
 
-    Q_INVOKABLE std::string title();
+    std::string title()const;
 };
 
 #endif // AMSTATION_H

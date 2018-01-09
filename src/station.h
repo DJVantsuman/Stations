@@ -1,26 +1,25 @@
 #ifndef STATION_H
 #define STATION_H
 
-#include <QAbstractItemModel>
-#include <iostream>
 #include <QObject>
+#include <iostream>
 
 class Station : public QObject
 {
     Q_OBJECT
-
 public:
-    explicit Station();
-    Station(Station const & station);
+    Station();
     virtual ~Station();
-    Station &operator=(Station const & station);
 
-    virtual std::string title() = 0;
+    virtual std::string title()const = 0;
+    std::string getName() const;
+    std::string getWaveband() const;
+    int         getWave() const;
 
 protected:
-    int _radioWave;
-    std::string _name;
-    std::string _waveband;
+    std::string mName;
+    std::string mWaveband;
+    int         mWave;
 };
 
 #endif // STATION_H

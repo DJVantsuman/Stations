@@ -1,33 +1,34 @@
 #include "fmstation.h"
 
-FmStation::FmStation() {}
+FmStation::FmStation() {
 
-FmStation::FmStation(int radioWave, std::string name, std::string waveband) {
-    _radioWave = radioWave;
-    _name = name;
-    _waveband = waveband;
 }
 
-FmStation::FmStation(FmStation const & station) : Station() {
-    _radioWave = station._radioWave;
-    _name = station._name;
-    _waveband = station._waveband;
+FmStation::FmStation(std::string name, std::string waveband, int wave) {
+    mName = name;
+    mWaveband = waveband;
+    mWave = wave;
 }
 
-FmStation &	FmStation::operator=(FmStation const & station)
-{
+FmStation::FmStation(FmStation const & station): Station(){
+    mName = station.mName;
+    mWaveband = station.mWaveband;
+    mWave = station.mWave;
+}
+
+FmStation::~FmStation() {
+    std::cout << title() << " destroyed." << std::endl;
+}
+
+FmStation &FmStation::operator=(FmStation const & station) {
     if (this != &station) {
-        _radioWave = station._radioWave;
-        _name = station._name;
-        _waveband = station._waveband;
+        mName = station.mName;
+        mWaveband = station.mWaveband;
+        mWave = station.mWave;
     }
     return *this;
 }
 
-FmStation::~FmStation() {
-    std::cout << this->title() + " destroyed" << std::endl;
-}
-
-std::string FmStation::title() {
-    return _name + " FM";
+std::string FmStation::title() const {
+    return mName + " FM";
 }

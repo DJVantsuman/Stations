@@ -1,22 +1,36 @@
-#pragma once
-#include <memory>
+#ifndef LOGIC_H
+#define LOGIC_H
+
 #include <QAbstractListModel>
-#include <list>
+#include <iostream>
 #include "station.h"
 #include "fmstation.h"
 #include "amstation.h"
 
-class Logic : public QObject
+class Logic : public QAbstractListModel
 {
     Q_OBJECT
-public:
-    Logic();
-    ~Logic();
-private:
-    std::list<Station *> stations;
 
 public:
-    void show(std::list<Station *> stations);
-    std::list<Station *> getList();
-    void clear(std::list<Station *> stations);
+    enum Roles {
+            Title = Qt::UserRole + 1,
+            Wave
+    };
+    explicit Logic(QObject *parent = 0);
+    ~Logic();
+
+    void addStation(Station *station);
+    void show();
+    void clear();
+
+    // Basic functionality:
+    QHash<int, QByteArray> roleNames() const;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+
+private:
+    QList<Station *> stationsList;
+
 };
+
+#endif // LOGIC_H
